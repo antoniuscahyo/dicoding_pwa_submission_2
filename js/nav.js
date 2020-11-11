@@ -46,16 +46,17 @@ document.addEventListener("DOMContentLoaded", function() {
       if (this.readyState == 4) {
         var content = document.querySelector("#body-content");
 
+        if (page === "home") {
+          getArticles();
+        } else if (page === "jadwalmain") {
+          getKompetisi();
+        } else if (page === "timfavorit") {
+          getSavedArticles();
+          xhttp.abort();
+        }
+
         if (this.status == 200) {
           content.innerHTML = xhttp.responseText;
-          if (page === "tim") {
-            getArticles();
-          } else if (page === "jadwalmain") {
-            getKompetisi();
-          } else if (page === "timfavorit") {
-            getSavedArticles();
-            xhttp.abort();
-          }
         } else if (this.status == 404) {
           content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
         } else {
