@@ -1,0 +1,16 @@
+{
+    "name": "INFOBOLING",
+    "short_name": "INFOBOLING",
+    "description": "Informasi Bola Inggris",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#00897B",
+    "theme_color": "#00897B",
+    "icons": [
+        {
+            "src": "assets/logo-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
