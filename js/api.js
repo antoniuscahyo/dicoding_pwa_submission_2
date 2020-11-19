@@ -498,6 +498,6 @@ function showArticle(data) {
             `;
   });
   // Sisipkan komponen card ke dalam elemen dengan id #content
-  document.getElementById("articles").innerHTML = articlesHTML;
+  // document.getElementById("articles").innerHTML = articlesHTML;
   console.log('fungsi-team-jalan');
 }
