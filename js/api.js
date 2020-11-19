@@ -304,7 +304,7 @@ function getSavedArticles() {
         <div class="card">
           <div class="card-image">
             <img src="${datatim.crestUrl}" alt="${datatim.name}">
-            <a class="btn-floating halfway-fab waves-effect waves-light red" href="./article.html?id=${datatim.id}&saved=true"><i class="material-icons">remove_red_eye</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red" href="./article.html?id=${datatim.id}&saved=true"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
           <span class="title">${datatim.name}</span>
@@ -312,8 +312,8 @@ function getSavedArticles() {
           </div>
         </div>
       </div>`;
-                });
-                datatimHTML += `</div>`;
+      });
+      datatimHTML += `</div>`;
     } else {
       var datatimHTML = `<div class="col s12 m4 l2"><p class="z-depth-5 shadow-demo card-panel center" style="font-family: 'Fredoka One', cursive;
       font-size: 40px;">Daftar Tim Favorit</p></div>
@@ -404,19 +404,19 @@ function getKompetisi() {
     caches.match(base_url + "competitions/2021/matches?dateFrom="+firstDay+"&dateTo="+nextWeek).then(function(response) {
       if (response) {
         response.json().then(function(data) {
-          var datatimHTML = `<table class="striped"><thead><tr><th>${data.competition.name}</th></tr></thead><tbody>`;
+          var dataKompetisiHTML = `<table class="striped"><thead><tr><th>${data.competition.name}</th></tr></thead><tbody>`;
           data.matches.forEach(function(datatim) {
             var d = new Date(datatim.utcDate);
-            datatimHTML += `
+            dataKompetisiHTML += `
                   <tr><td>
                   <strong>${d.toLocaleDateString("en-US",optionsdate)}</strong><br>
                   ${datatim.homeTeam.name} VS ${datatim.awayTeam.name}
                   </td></tr>
                 `;
           });
-          datatimHTML += `</tbody></table>`;
+          dataKompetisiHTML += `</tbody></table>`;
           // Sisipkan komponen card ke dalam elemen dengan id #content
-          document.getElementById("jadwalmain").innerHTML = datatimHTML;
+          document.getElementById("jadwalmain").innerHTML = dataKompetisiHTML;
 
         });
       }
