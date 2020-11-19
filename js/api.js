@@ -439,16 +439,16 @@ function getKompetisi() {
       // Menyusun komponen card artikel secara dinamis
       data.matches.forEach(function(datatim) {
         var d = new Date(datatim.utcDate);
-        datatimHTML += `
+        dataKompetisiHTML += `
               <tr><td>
               <strong>${d.toLocaleDateString("en-US",optionsdate)}</strong><br>
               ${datatim.homeTeam.name} VS ${datatim.awayTeam.name}
               </td></tr>
             `;
       });
-      datatimHTML += `</tbody></table>`;
+      dataKompetisiHTML += `</tbody></table>`;
       // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("jadwalmain").innerHTML = datatimHTML;
+      document.getElementById("jadwalmain").innerHTML = dataKompetisiHTML;
       
     })
     .catch(error);
