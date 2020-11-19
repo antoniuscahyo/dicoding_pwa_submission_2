@@ -304,7 +304,7 @@ function getSavedArticles() {
         <div class="card">
           <div class="card-image">
             <img src="${datatim.crestUrl}" alt="${datatim.name}">
-            <a class="btn-floating halfway-fab waves-effect waves-light red" href="./article.html?id=${datatim.id}&saved=true"><i class="material-icons">add</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red" href="./article.html?id=${datatim.id}&saved=true"><i class="material-icons">remove_red_eye</i></a>
           </div>
           <div class="card-content">
           <span class="title">${datatim.name}</span>
