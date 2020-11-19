@@ -13,7 +13,8 @@ function showNotifikasi(txt) {
   }
   if (Notification.permission === 'granted') {
       navigator.serviceWorker.ready.then(function(registration) {
-          registration.showNotification(title, options);
+        //   registration.showNotification(title, options);
+        M.toast({html: title+'<br>'+txt, classes: 'rounded'});
       });
   } else {
       console.error('FItur notifikasi tidak diijinkan.');
@@ -26,7 +27,7 @@ function saveForLater(datatim) {
       .then(function (db) {
           var tx = db.transaction("teams", "readwrite");
           var store = tx.objectStore("teams");
-          store.add(datatim);
+          store.put(datatim);
           return tx.complete;
       })
       .then(function () {

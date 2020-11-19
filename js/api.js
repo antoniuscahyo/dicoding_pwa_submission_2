@@ -82,125 +82,47 @@ function error(error) {
   console.log("Error : " + error);
 }
 
+const fetchAPI = url => {
+  return fetch(url, {
+      headers: {
+          'X-Auth-Token': '766df19ffa8a4aa09cae02ecd26cc380'
+      }
+  })
+  .then(res => {
+      if (res.status !== 200) {
+          console.log("Error: " + res.status);
+          return Promise.reject(new Error(res.statusText))
+      } else {
+          return Promise.resolve(res)
+      }
+  })
+  .then(res => res.json())
+  .catch(err => {
+      console.log(err)
+  })
+};
+
 // Blok kode untuk melakukan request data json
 function getArticles() {
-
   document.getElementById("body-content").innerHTML = loading;
 
   if ("caches" in window) {
     caches.match(base_url + "competitions/2021/teams").then(function(response) {
       if (response) {
         response.json().then(function(data) {
-          var articlesHTML = "";
-          data.teams.forEach(function(article) {
-            articlesHTML += `
-            <div class="col s12 m6">
-              <div class="card">
-                <div class="card-image logo-team">
-                  <img src="${article.crestUrl}" class="responsive-img" width="30" alt="${article.name}">
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">
-                    <h6>${article.name}<h6>
-                    <h6>${article.address}<h6>
-                  </span>
-                  <p>
-                    <a href="./article.html?id=${article.id}" class="waves-effect waves-light btn">
-                      Detail Tim
-                    </a>
-                  </p>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="card-content">
-                  <p>
-                  <div class="valign-wrapper">
-                    <a href="./article.html?id=${article.id}" class="waves-effect waves-light btn">
-                      Detail Tim
-                    </a>
-                  </div>
-                  </p>
-                </div>
-
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-
-              </div>
-            </div>
-                `;
-          });
-          // Sisipkan komponen card ke dalam elemen dengan id #content
-          document.getElementById("articles").innerHTML = articlesHTML;
+          showArticle(data);
         });
       }
     });
   }
 
-  var myHeaders = new Headers();
-  myHeaders.append("X-Auth-Token", "766df19ffa8a4aa09cae02ecd26cc380");
-
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
-
-  fetch(base_url + "competitions/2021/teams" ,requestOptions)
-    .then(status)
-    .then(json)
-    .then(function(data) {
-      // Objek/array JavaScript dari response.json() masuk lewat data.
-
-      // Menyusun komponen card artikel secara dinamis
-      var articlesHTML = "";
-      data.teams.forEach(function(article) {
-        articlesHTML += `
-        <div class="col s12 m6">
-          <div class="card sticky-action">
-            <div class="card-image waves-effect waves-block waves-light logo-team activator">
-              <img src="${article.crestUrl}" class="activator" width="30" alt="${article.name}">
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="card-content">
-            <h6>${article.name}</h6>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="card-action">
-              <a href="./article.html?id=${article.id}" class="waves-effect waves-light btn">
-                Detail Tim
-              </a>
-              <a class="waves-effect waves-light btn activator">
-                Ringkasan Profile
-              </a>
-            </div>
-
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">${article.name}<i class="material-icons right">close</i></span>
-              <p>${article.address}</p>
-              <p>${article.email}</p>
-              <p>${article.phone}</p>
-              <p>${article.venue}</p>
-              <p href="${article.website}">${article.website}</p>
-            </div>
-
-          </div>
-        </div>
-            `;
-      });
-      // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("articles").innerHTML = articlesHTML;
-    })
-    .catch(error);
+  fetchAPI(base_url + "competitions/2021/teams")
+  .then(data => {
+    showArticle(data);
+  })
+  .catch(error => {
+      console.log(error)
+  });
 }
 
 function getArticleById() {
@@ -532,4 +454,49 @@ function getKompetisi() {
     })
     .catch(error);
 
+}
+
+// INI UNTUK RENDER DATA DARI FETCH API
+function showArticle(data) {
+  var articlesHTML = "";
+      data.teams.forEach(function(article) {
+        articlesHTML += `
+        <div class="col s12 m6">
+          <div class="card sticky-action">
+            <div class="card-image waves-effect waves-block waves-light logo-team activator">
+              <img src="${article.crestUrl}" class="activator" width="30" alt="${article.name}">
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="card-content">
+            <h6>${article.name}</h6>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="card-action">
+              <a href="./article.html?id=${article.id}" class="waves-effect waves-light btn">
+                Detail Tim
+              </a>
+              <a class="waves-effect waves-light btn activator">
+                Ringkasan Profile
+              </a>
+            </div>
+
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">${article.name}<i class="material-icons right">close</i></span>
+              <p>${article.address}</p>
+              <p>${article.email}</p>
+              <p>${article.phone}</p>
+              <p>${article.venue}</p>
+              <p href="${article.website}">${article.website}</p>
+            </div>
+
+          </div>
+        </div>
+            `;
+  });
+  // Sisipkan komponen card ke dalam elemen dengan id #content
+  document.getElementById("articles").innerHTML = articlesHTML;
 }

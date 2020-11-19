@@ -45,16 +45,18 @@ document.addEventListener("DOMContentLoaded", function() {
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4) {
         var content = document.querySelector("#body-content");
-
-        if (page === "home") {
+        if (page === "tim") {
           getArticles();
+          console.log('test : load page tim jalan');
         } else if (page === "jadwalmain") {
+          console.log('test : load page jadwalmain jalan');
           getKompetisi();
         } else if (page === "timfavorit") {
           getSavedArticles();
+          console.log('test : load page tim favorit');
+
           xhttp.abort();
         }
-
         if (this.status == 200) {
           content.innerHTML = xhttp.responseText;
         } else if (this.status == 404) {

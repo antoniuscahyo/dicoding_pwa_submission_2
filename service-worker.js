@@ -16,11 +16,17 @@ var urlsToCache = [
   "/js/idb.js",
   "/js/script.js",
   "/js/sw-register.js",
+  "/push.js",
   "/icon.png",
+  "/assets/logo-192x192.png",
+  "/assets/logo-256x256.png",
+  "/assets/logo-384x384.png",
   "/assets/logo-512x512.png",
   "/assets/stadium-background.jpg",
   "https://fonts.googleapis.com/icon?family=Material+Icons",
-  "https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+  "https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap",
+  "https://fonts.gstatic.com/s/fredokaone/v8/k3kUo8kEI-tA1RRcTZGmTlHGCaen8wf-.woff2",
+  "https://fonts.gstatic.com/s/materialicons/v67/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2"
 ];
 
 self.addEventListener("install", function(event) {
