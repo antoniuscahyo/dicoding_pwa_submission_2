@@ -404,19 +404,19 @@ function getKompetisi() {
     caches.match(base_url + "competitions/2021/matches?dateFrom="+firstDay+"&dateTo="+nextWeek).then(function(response) {
       if (response) {
         response.json().then(function(data) {
-          var dataKompetisiHTML = `<table class="striped"><thead><tr><th>${data.competition.name}</th></tr></thead><tbody>`;
+          var datatimHTML = `<table class="striped"><thead><tr><th>${data.competition.name}</th></tr></thead><tbody>`;
           data.matches.forEach(function(datatim) {
             var d = new Date(datatim.utcDate);
-            dataKompetisiHTML += `
+            datatimHTML += `
                   <tr><td>
                   <strong>${d.toLocaleDateString("en-US",optionsdate)}</strong><br>
                   ${datatim.homeTeam.name} VS ${datatim.awayTeam.name}
                   </td></tr>
                 `;
           });
-          dataKompetisiHTML += `</tbody></table>`;
+          datatimHTML += `</tbody></table>`;
           // Sisipkan komponen card ke dalam elemen dengan id #content
-          document.getElementById("jadwalmain").innerHTML = dataKompetisiHTML;
+          document.getElementById("jadwalmain").innerHTML = datatimHTML;
 
         });
       }
@@ -439,16 +439,16 @@ function getKompetisi() {
       // Menyusun komponen card artikel secara dinamis
       data.matches.forEach(function(datatim) {
         var d = new Date(datatim.utcDate);
-        dataKompetisiHTML += `
+        datatimHTML += `
               <tr><td>
               <strong>${d.toLocaleDateString("en-US",optionsdate)}</strong><br>
               ${datatim.homeTeam.name} VS ${datatim.awayTeam.name}
               </td></tr>
             `;
       });
-      dataKompetisiHTML += `</tbody></table>`;
+      datatimHTML += `</tbody></table>`;
       // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("jadwalmain").innerHTML = dataKompetisiHTML;
+      document.getElementById("jadwalmain").innerHTML = datatimHTML;
       
     })
     .catch(error);
